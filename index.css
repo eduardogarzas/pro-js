@@ -1,0 +1,193 @@
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 4rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+input {
+  display: block;
+  min-width: 20rem;
+  margin-top: 0.2rem;
+  background: rgba(0, 0, 0, 0.03);
+  padding: 0.5rem 0.1rem;
+  border: 0;
+  border-bottom: 5px solid var(--hotpink);
+  font-size: 1.5rem;
+  color: var(--hotpink);
+}
+
+input:focus {
+  outline: 0;
+  background: rgba(0, 0, 0, 0.06);
+}
+
+label:nth-of-type(even) input {
+  border-bottom-color: var(--orange);
+  color: var(--orange);
+}
+
+button {
+  cursor: pointer;
+  border: 0;
+  background-image: var(--gradient);
+  padding: 0.75rem 4rem;
+  border-radius: 5rem;
+  color: white;
+  font-family: var(--font-display);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 1.5rem;
+  line-height: 1;
+  transition: 0.3s;
+}
+
+button:hover,
+button:focus {
+  opacity: 0.9;
+  outline: 0;
+}
+
+.mensaje {
+  background-image: var(--gradient);
+  margin-bottom: 2rem;
+  color: white;
+  padding: 1rem 3rem;
+  border-radius: 10px;
+  font-size: 1.5rem;
+}
+
+.mensaje:empty {
+  display: none;
+}
+
+.mensaje p {
+  margin: 1em 0;
+}
+:root {
+  --bg: #fafafa;
+  --font: "Archivo", sans-serif;
+  --font-display: "Archivo Narrow", sans-serif;
+  --hotpink: #e94057;
+  --orange: #f27121;
+  --gradient: linear-gradient(35deg, var(--orange), var(--hotpink));
+}
+
+body {
+  min-height: 100vh;
+  background: var(--bg);
+  font-family: var(--font);
+}
+
+main {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.mesa {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  align-content: center;
+  max-width: 50rem;
+  margin: auto;
+}
+
+.tarjeta {
+  width: 6rem;
+  height: 6rem;
+  margin: 0.5rem;
+  border-radius: 0.3em;
+  background-image: var(--gradient);
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.25), 4px 4px 10px rgba(0, 0, 0, 0.2);
+  position: relative;
+  transition: 0.3s;
+  cursor: pointer;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+}
+
+.tarjeta__contenido {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  transform: rotateY(-180deg);
+  backface-visibility: hidden;
+  background-color: white;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.25), 4px 4px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 0.3em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2.5rem;
+  padding-top: 0.4rem;
+}
+
+.tarjeta__contenido::selection {
+  background: transparent;
+}
+
+.tarjeta.descubierta {
+  transform: rotateY(-180deg);
+}
+keyframes error {
+  10%,
+  90% {
+    transform: rotateY(-180deg) translateX(-1px);
+  }
+  20%,
+  80% {
+    transform: rotateY(-180deg) translateX(2px);
+  }
+  30%,
+  50%,
+  70% {
+    transform: rotateY(-180deg) translateX(-4px);
+  }
+  40%,
+  60% {
+    transform: rotateY(-180deg) translateX(4px);
+  }
+}
+
+@keyframes acierto {
+  from {
+    transform: rotateY(-180deg) scale3d(1, 1, 1);
+    opacity: 1;
+  }
+
+  25% {
+    transform: rotateY(-180deg) scale3d(1.1, 1.1, 1.1);
+    opacity: 1;
+  }
+
+  to {
+    transform: rotateY(-180deg) scale3d(1, 1, 1);
+    opacity: 0;
+  }
+}
+
+.acertada {
+  pointer-events: none;
+}
+
+.acertada .tarjeta__contenido {
+  animation: acierto 1.3s ease-in-out forwards;
+}
+
+.error {
+  animation: error 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
